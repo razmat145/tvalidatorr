@@ -1,6 +1,6 @@
 {
   "name": "tvalidatorr",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Validates JSO(N) inputs against Typescript Types",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
