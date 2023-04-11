@@ -1,0 +1,61 @@
+{
+    "name": "User",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "number",
+            "required": true
+        },
+        "active": {
+            "type": "boolean",
+            "required": true
+        },
+        "address": {
+            "type": "object",
+            "properties": {
+                "street": {
+                    "type": "string",
+                    "required": true
+                },
+                "county": {
+                    "type": "string",
+                    "required": true
+                },
+                "flatNumber": {
+                    "type": "number",
+                    "required": false
+                }
+            },
+            "required": true
+        },
+        "phone": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "required": false
+        },
+        "tasks": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "required": true
+                    },
+                    "priority": {
+                        "type": "number",
+                        "required": true
+                    },
+                    "createdAt": {
+                        "type": "Date",
+                        "required": false
+                    }
+                },
+                "required": true
+            },
+            "required": true
+        }
+    }
+}
