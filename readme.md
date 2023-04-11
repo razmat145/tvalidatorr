@@ -9,7 +9,7 @@ Ability to validate various JSO(N) user/3rd patry inputs against type definition
 ###### Workings
 - errors will be thrown in the order of detection
 - read source files that contain types are cached in order to be reused
-- if no errors are thrown then the input is valid and comforms with the given type
+- if no errors are thrown then the input is valid and conforms with the given type
 ###### Rules
 - optional properties are only validated against the type and not the presence
 - additional properties that are not defined in the source types are considered a violation of input validity
