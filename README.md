@@ -133,7 +133,7 @@ with e.g. npm script attached to the build
 "build:types": "tparserr generate -f=./src/lib/types/User.ts -o=./types.json"
 ```
 once types are described in said json file, they can be used and validated
-```
+```typescript
 await Validator.initialiseByTypeDescription('./types.json'); // relative type paths are resolved against process.cwd()
 
 const fakeUserInput = {
