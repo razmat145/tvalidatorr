@@ -1,6 +1,6 @@
 {
   "name": "tvalidatorr",
-  "version": "0.0.8",
+  "version": "0.1.0",
   "description": "Validates JSO(N) inputs against Typescript Types",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "lodash": "^4.17.21",
-    "tparserr": "^1.2.2"
+    "tparserr": "^1.2.9"
   },
   "pre-commit": [
     "lint"

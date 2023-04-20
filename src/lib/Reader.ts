@@ -1,6 +1,9 @@
 
 import _ from 'lodash';
 
+import { promises as afs } from 'fs';
+import path from 'path';
+
 import { ITypeDescription, Parserr, IParserOpts } from 'tparserr';
 
 import { IValidatorOpts } from './types/ValidatorOpts';
@@ -30,6 +33,12 @@ class Reader {
         } else {
             throw new Error(`Type: ${typeName} does not exist in cache, have you forgot to load it?`);
         }
+    }
+
+    public async loadTypeDescriptionsByFile(file?: string) {
+        const typeDescriptions = await afs.readFile(file || path.resolve(process.cwd(), 'typeDescriptions.json'), 'utf-8');
+
+        this.loadTypeDescriptionsToCache(JSON.parse(typeDescriptions));
     }
 
     public async loadTypeDescriptions(opts: Partial<IValidatorOpts>) {

@@ -22,6 +22,8 @@ npm install --save tvalidatorr
 ```
 
 ### Usage
+
+#### Access to /src
 Given type
 ``` typescript
 export interface User {
@@ -117,6 +119,73 @@ try {
     //  Input has a User type mismatch at path: *tasks[0].priority* - number type expected
 }
 ```
+
+#### Runtime without access to /src type files
+
+###### Using tparserr to generate type description file
+
+tparserr can be installed as dev and attached to build
+```
+npm install --save-dev tparserr
+```
+with e.g. npm script attached to the build
+```
+"build:types": "tparserr generate -f=./src/lib/types/User.ts -o=./types.json"
+```
+once types are described in said json file, they can be used and validated
+```
+await Validator.initialiseByTypeDescription('./types.json'); // relative type paths are resolved against process.cwd()
+
+const fakeUserInput = {
+    id: 101,
+    active: true
+};
+
+try {
+    Validator.validateByName(fakeUserInput, 'User');
+} catch (err) {
+    console.error(err.message);
+    // Input is missing property *address* for type User
+}
+
+const moreCompleteFakeUserInput = {
+    id: 101,
+    active: true,
+    address: {
+        street: 'Some Street 101'
+    }
+}
+
+try {
+    Validator.validateByName(moreCompleteFakeUserInput, 'User');
+} catch (err) {
+    console.error(err.message);
+    // Input is missing property *address.county* for type User
+}
+
+const userWithInvalidTaskInput = {
+    id: 101,
+    active: true,
+    address: {
+        street: 'Some Street 101',
+        county: 'County near you'
+    },
+    tasks: [
+        {
+            name: 'House Duties',
+            priority: 'Should be a number!'
+        }
+    ]
+}
+
+try {
+    Validator.validateByName(userWithInvalidTaskInput, 'User');
+} catch (err) {
+       console.error(err.message);
+       //  Input has a User type mismatch at path: *tasks[0].priority* - number type expected
+}
+```
+
 
 ## License
 This library is licensed under the Apache 2.0 License
