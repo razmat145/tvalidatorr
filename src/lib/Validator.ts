@@ -18,6 +18,10 @@ class Validator {
         await Reader.loadTypeDescriptions(opts);
     }
 
+    public async initialiseByTypeDescription(path?: string) {
+        await Reader.loadTypeDescriptionsByFile(path);
+    }
+
     public validateByName<T extends TObjectOrJson>(input: T, typeName: string) {
         const typeDescription = Reader.getCachedTypeDescription(typeName);
 
